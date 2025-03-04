@@ -1,5 +1,5 @@
 public class Customer {
-	private String customerId;
+	private final String customerId;
 	private Address address;
 	private Phone phone;
 	private String email;
@@ -30,6 +30,26 @@ public class Customer {
 	
 	public Account getAccount() {
 		return account;
+	}
+	
+	public void setId(String id) {
+		this.customerId = id;
+	}
+	
+	public void setAddress(Address addy) {
+		this.address = addy;
+	}
+	
+	public void setPhone(Phone phone) {
+		this.phone = phone;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 	

@@ -11,7 +11,7 @@ public class Customer {
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.account = new Account();
+        this.account = new Account(this);
     }
 	
 	public String getId() {
@@ -32,9 +32,6 @@ public class Customer {
 		return account;
 	}
 	
-	public void setId(String id) {
-		this.customerId = id;
-	}
 	
 	public void setAddress(Address addy) {
 		this.address = addy;

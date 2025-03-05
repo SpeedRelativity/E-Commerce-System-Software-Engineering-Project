@@ -2,9 +2,6 @@
 public class Phone {
 	private String phoneNumber;
 	
-	public Phone() {
-		
-	}
 	
 	public Phone(String number) {
 		this.phoneNumber = number;

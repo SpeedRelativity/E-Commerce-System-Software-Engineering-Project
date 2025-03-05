@@ -9,3 +9,6 @@
 /ShoppingCart.class
 /WebUser.class
 /Driver.class
+/LineItem.class
+/Order$OrderStatus.class
+/WebUser$UserState.class

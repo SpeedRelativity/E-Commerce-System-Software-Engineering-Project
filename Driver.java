@@ -1,68 +1,72 @@
+import java.util.Date;
+
 public class Driver {
     public static void main(String[] args) {
-        // Placeholder objects for dependencies
-        Address address = new Address("B Street","Hayward", "california", "94580"); // Assuming Address has a default constructor
-        Phone phone = new Phone();       // Assuming Phone has a default constructor
 
-        // Step 1: Create a Customer
-        System.out.println("Creating a new customer...");
-        Customer customer = new Customer("CUST001", address, phone, "customer@example.com");
+        System.out.println("Let's try creating account from Webuser.");
+        // gathering basic information.
+        String username = "speedrelativity";
+        String password = "1234567890";
+        Address address1 = new Address("1270 Hayward St", "SomeCity", "SomeState", "12345");
+        Date date1 = new Date();
+        Phone phoneNum = new Phone("4156106914");
+        String email = "someemail@gmail.com";
 
-        // Step 2: Test Customer Getters
-        System.out.println("Testing Customer Getters:");
-        System.out.println("Customer ID: " + customer.getId());
-        System.out.println("Customer Email: " + customer.getEmail());
-        System.out.println("Customer Address: " + customer.getAddress());
-        System.out.println("Customer Phone: " + customer.getPhone());
+        Customer newCustomer = new Customer(address1, phoneNum, email);
 
-        // Step 3: Test Account Creation
-        System.out.println("\nTesting Account Creation:");
-        Account account = customer.getAccount();
+        WebUser Nechar = new WebUser();
+
+        // Webuser testing...
+        Nechar.setCustomer(newCustomer);
+        Nechar.setLoginId(username);
+        Nechar.setPassword(password);
+        System.out.println("Webuser created successfully.");
+
+        // Account testing...
+        Account account = new Account(newCustomer);
+        System.out.println("Account created successfully.");
+        System.out.println("Customer ID: " + newCustomer.getId());
+        System.out.println("Customer Email: " + newCustomer.getEmail());
+        System.out.println("Customer Address: " + newCustomer.getAddress());
+        System.out.println("Customer Phone: " + newCustomer.getPhone());
         System.out.println("Account ID: " + account.getAccountId());
         System.out.println("Account Open Date: " + account.getOpenDate());
-        System.out.println("Is Account Closed? " + account.isClosed());
-
-        // Step 4: Test Adding Orders to Account
-        System.out.println("\nTesting Adding Orders to Account:");
-        Order order1 = new Order(); // Placeholder order object
-        Order order2 = new Order(); // Another placeholder order object
-
-        try {
-            account.addOrder(order1);
-            System.out.println("Order 1 added successfully!");
-            account.addOrder(order2);
-            System.out.println("Order 2 added successfully!");
-
-            // Attempt to add a duplicate order (should throw an exception)
-            account.addOrder(order1);
-            System.out.println("Duplicate order added (this should NOT happen).");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Caught expected exception for duplicate order: " + e.getMessage());
-        }
-
-        // Step 5: Test Adding Payments to Account
-        System.out.println("\nTesting Adding Payments to Account:");
-        Payment payment1 = new Payment(); // Placeholder payment object
-        Payment payment2 = new Payment(); // Another placeholder payment object
-
-        try {
-            account.addPayment(payment1);
-            System.out.println("Payment 1 added successfully!");
-            account.addPayment(payment2);
-            System.out.println("Payment 2 added successfully!");
-
-            // Attempt to add a duplicate payment (should throw an exception)
-            account.addPayment(payment1);
-            System.out.println("Duplicate payment added (this should NOT happen).");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Caught expected exception for duplicate payment: " + e.getMessage());
-        }
-
-        // Step 6: Test Closing the Account
-        System.out.println("\nTesting Closing the Account:");
         account.closeAccount();
-        System.out.println("Account closed successfully!");
-        System.out.println("Is Account Closed? " + account.isClosed());
+        System.out.println("Account closed successfully.");
+
+        // ShoppingCart testing...
+        System.out.println("Creating a product...");
+        Product product = new Product("iPhone", "Apple");
+        Product product2 = new Product("Macbook", "Apple");
+        System.out.println("Product created successfully.");
+
+        LineItem item1 = new LineItem(product, 5, 1000);
+        LineItem item2 = new LineItem(product2, 3, 1500);
+
+        ShoppingCart cart = new ShoppingCart(account);
+        System.out.println("ShoppingCart created successfully.");
+        cart.addLineItem(item2);
+        cart.addLineItem(item1);
+        System.out.println("Shopping Cart Creation Date: " + cart.getCreated());
+        System.out.println("Line Item Count: " + cart.getLineItems().length);
+
+        // Order testing...
         
+        Order order = new Order("1", address1, account);
+        System.out.println("Order created successfully.");
+        order.addLineItem(item1);
+        order.addLineItem(item2);
+        System.out.println("Order Number: " + order.getOrderNumber());
+        System.out.println("Order Ship To: " + order.getShipTo());
+        System.out.println("Order Total: " + order.getTotal());
+
+        // Payment testing...
+        
+        Payment payment1 = new Payment("P123", date1, order.getTotal(), "Credit Card", account);
+        order.addPayment(payment1);
+        System.out.println("Payment added to order successfully.");
+        System.out.println("Payment ID: " + payment1.getPaymentId());
+        System.out.println("Payment Total: " + payment1.getTotal());
+
     }
 }
